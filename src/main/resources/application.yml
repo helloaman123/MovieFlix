@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: MovieFlix
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/moviestwo
+    username: postgres
+    password: admin12345
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8780
+
+project:
+  poster: poster/
+  
+base:
+   url: http://localhost:8780
