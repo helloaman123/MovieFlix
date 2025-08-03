@@ -64,6 +64,36 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!--spring security required depedencies-->
+		<!--user model with refresh token field--><!-- 
+		user repo
+		refreh token model
+		refresh token repo
+		application config for beans of important interface/classes
+		jwt service
+		refresh token service
+		auth filter service-->
+		  <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>  
+       <dependency>
+		  <groupId>io.jsonwebtoken</groupId>
+		  <artifactId>jjwt-api</artifactId>
+		  <version>0.11.5</version> 
+	   </dependency>
+	   <dependency>
+		   <groupId>io.jsonwebtoken</groupId>
+		   <artifactId>jjwt-impl</artifactId>
+		   <version>0.12.6</version>
+	   </dependency>
+	   <dependency>
+		   <groupId>io.jsonwebtoken</groupId>
+		   <artifactId>jjwt-jackson</artifactId>
+		   <version>0.12.6</version>
+	   </dependency>
+    
 	</dependencies>
 
 	<build>
