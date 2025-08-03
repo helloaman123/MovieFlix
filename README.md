@@ -1,2 +1,2 @@
 # MovieFlix
-POC of various SpringBott features, like Pagination , Security(JWT),Email
+POC of various SpringBoot features, like Pagination&Sorting , Security(JWT),Email Service.
