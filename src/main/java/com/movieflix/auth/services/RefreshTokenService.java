@@ -37,4 +37,15 @@ public class RefreshTokenService {
 	     }
 	     return refreshToken;
 	}
+	
+	public RefreshToken verifyRefreshToken(String refreshToken) {
+	 RefreshToken reftoken =refreshTokenRepository.findByRefreshToken(refreshToken)
+			 .orElseThrow(()-> new RuntimeException("No token found"));
+	    if(reftoken.getExpirationTime().compareTo(Instant.now())<0) {
+	    	
+	    	refreshTokenRepository.delete(reftoken);
+	    	throw new RuntimeException("Refresh token expired");
+	    }
+	    return reftoken;
+	}
 }
