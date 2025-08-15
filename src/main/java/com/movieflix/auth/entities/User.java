@@ -1,8 +1,10 @@
 package com.movieflix.auth.entities;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
@@ -123,32 +125,31 @@ public class User implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return List.of(new SimpleGrantedAuthority(role.name()));
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return isAccountNonExpired;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return isAccountNonLocked;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return isCredentialsNonExpired;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return isEnabled;
+		return true;
 	}
 
 	@Override
@@ -162,4 +163,69 @@ public class User implements UserDetails{
 		// TODO Auto-generated method stub
 		return email;
 	}
+    public static class Builder {
+        private Integer userId;
+        private String name;
+        private String username;
+        private String email;
+        private String password;
+        private UserRole role;
+        private RefreshToken refreshToken;
+        private boolean isEnabled = true;
+        private boolean isAccountNonExpired = true;
+        private boolean isAccountNonLocked = true;
+        private boolean isCredentialsNonExpired = true;
+
+        public Builder userId(Integer userId) {
+            this.userId = userId;
+            return this;
+        }
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+        public Builder username(String username) {
+            this.username = username;
+            return this;
+        }
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
+        public Builder role(UserRole role) {
+            this.role = role;
+            return this;
+        }
+        public Builder refreshToken(RefreshToken refreshToken) {
+            this.refreshToken = refreshToken;
+            return this;
+        }
+        public Builder enabled(boolean enabled) {
+            this.isEnabled = enabled;
+            return this;
+        }
+        public Builder accountNonExpired(boolean accountNonExpired) {
+            this.isAccountNonExpired = accountNonExpired;
+            return this;
+        }
+        public Builder accountNonLocked(boolean accountNonLocked) {
+            this.isAccountNonLocked = accountNonLocked;
+            return this;
+        }
+        public Builder credentialsNonExpired(boolean credentialsNonExpired) {
+            this.isCredentialsNonExpired = credentialsNonExpired;
+            return this;
+        }
+        public User build() {
+            return new User(userId, name, username, email, password, role);
+        }
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 }

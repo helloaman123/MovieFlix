@@ -17,7 +17,7 @@ import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
-   private static final String SECERET_KEY = "b7121232121";
+   private static final String SECERET_KEY = "w7Z2WxRpykGri1IYWigRi1b5VEJMMtLSaXX1MvVeGZc=";
    
    //extract username from JWT
    
@@ -34,8 +34,10 @@ public <T> T extractClaim(String token, Function<Claims ,T> claimsResolver) {
 //extract information from jwt
 private Claims extractAllClaims(String token) {
 	// TODO Auto-generated method stub
+	token = token.trim();
+	System.out.println("Parsing Token: '" + token + "'");
 	return Jwts
-			.parserBuilder()
+			.parser()
 			.setSigningKey(getSignInKey())
 			.build()
 			.parseClaimsJws(token)
@@ -52,7 +54,8 @@ public String generateToken(UserDetails userDetails) {
 	return generateToken(new HashMap(),userDetails);
 }
 //generate token using jwt utility class and return token as string
-  public String generateToken(
+  @SuppressWarnings("deprecation")
+public String generateToken(
 		  Map<String ,Object> extraClaims,
 		  UserDetails userDetails
 		  ) {
@@ -60,7 +63,7 @@ public String generateToken(UserDetails userDetails) {
 			  .setClaims(extraClaims)
 			  .setSubject(userDetails.getUsername())
 			  .setIssuedAt(new Date(System.currentTimeMillis()))
-			  .setExpiration(new Date(System.currentTimeMillis()+2000*60*24))
+			  .setExpiration(new Date(System.currentTimeMillis()+60*60*1000))
 			  .signWith(getSignInKey(), SignatureAlgorithm.HS256)
 			  .compact();
   }
